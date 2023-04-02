@@ -48,7 +48,6 @@ public class Recipe implements Serializable {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "recipe", cascade = {CascadeType.MERGE})
     private Nutrition nutrition;
 
-
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "recipe_ingredient",
             joinColumns = @JoinColumn(name = "recipe_id"),
