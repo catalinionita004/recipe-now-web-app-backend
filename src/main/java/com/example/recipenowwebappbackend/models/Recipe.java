@@ -1,5 +1,6 @@
 package com.example.recipenowwebappbackend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -41,8 +42,12 @@ public class Recipe implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe", cascade = {CascadeType.MERGE})
     private List<Interaction> interactionList;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe", cascade = {CascadeType.MERGE})
+    private List<RecipeStep> recipeStepList;
+
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "recipe", cascade = {CascadeType.MERGE})
     private Nutrition nutrition;
+
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "recipe_ingredient",

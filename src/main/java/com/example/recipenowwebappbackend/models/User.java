@@ -1,6 +1,7 @@
 package com.example.recipenowwebappbackend.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,25 +29,28 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String lastName;
 
+    @JsonIgnore
     @Column(nullable = false)
     private String username;
-
+    @JsonIgnore
     @Column(nullable = false)
     private String email;
 
+    @JsonIgnore
     @Column(nullable = false)
     private String password;
-
+    @JsonIgnore
     @Column(nullable = false)
     private Role role;
-
+    @JsonIgnore
     @Column(nullable = false)
     private int enabled;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade={CascadeType.MERGE})
     private List<Recipe> recipeList;
 
-
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade={CascadeType.MERGE})
     private List<Interaction> interactionList;
 

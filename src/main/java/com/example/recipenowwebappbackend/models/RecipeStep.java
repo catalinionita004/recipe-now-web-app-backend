@@ -5,25 +5,27 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Entity
-@Table(name = "tag")
+@Table(name = "recipe_steps")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Getter
 @Setter
-public class Tag {
+public class RecipeStep {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name",nullable = false)
-    private String name;
-
     @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tags", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Recipe> recipes = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "recipe_id", nullable = false)
+    private Recipe recipe;
+
+    @Column(name = "step_number")
+    private int stepNumber;
+
+    @Column(name = "step_description")
+    private String stepDescription;
 }
