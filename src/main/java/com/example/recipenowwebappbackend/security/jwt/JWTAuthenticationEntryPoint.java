@@ -1,23 +1,19 @@
 package com.example.recipenowwebappbackend.security.jwt;
 
+import com.example.recipenowwebappbackend.dto.base.response.ApiResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.henry.bookrecommendationsystem.dto.base.response.ApiResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-/**
- * @author Henry Azer
- * @since 04/11/2022
- */
 @Component
 public class JWTAuthenticationEntryPoint implements AuthenticationEntryPoint, Serializable {
 

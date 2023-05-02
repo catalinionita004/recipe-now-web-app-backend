@@ -1,16 +1,15 @@
 package com.example.recipenowwebappbackend.transformer.base;
 
-import com.henry.bookrecommendationsystem.dto.base.BaseDto;
-import com.henry.bookrecommendationsystem.entity.base.BaseEntity;
-import com.henry.bookrecommendationsystem.transformer.mapper.base.BaseMapper;
+
+
+import com.example.recipenowwebappbackend.dto.base.BaseDto;
+import com.example.recipenowwebappbackend.entity.base.BaseEntity;
+import com.example.recipenowwebappbackend.transformer.mapper.base.BaseMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * @author Henry Azer
- * @since 03/11/2022
- */
+
 public interface BaseTransformer<Entity extends BaseEntity, Dto extends BaseDto, Mapper extends BaseMapper<Entity, Dto>> {
 
     Mapper getMapper();

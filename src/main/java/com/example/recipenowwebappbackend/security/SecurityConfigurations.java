@@ -1,7 +1,7 @@
 package com.example.recipenowwebappbackend.security;
 
-import com.henry.bookrecommendationsystem.security.jwt.JWTAuthenticationEntryPoint;
-import com.henry.bookrecommendationsystem.security.jwt.JWTRequestFilter;
+import com.example.recipenowwebappbackend.security.jwt.JWTAuthenticationEntryPoint;
+import com.example.recipenowwebappbackend.security.jwt.JWTRequestFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,11 +18,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
 import java.util.Collections;
+import java.util.List;
 
-/**
- * @author Henry Azer
- * @since 04/11/2022
- */
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
@@ -31,17 +28,24 @@ public class SecurityConfigurations {
     private final JWTAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .csrf().disable().httpBasic().disable().cors()
-                .and().authorizeHttpRequests()
-                .antMatchers("/api/user/register").permitAll()
-                .antMatchers("/api/auth/log-in").permitAll()
-                //.antMatchers("/book-service/api/**").authenticated()
-                .and().exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-        return httpSecurity.build();
+    protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.cors().configurationSource(request -> {
+            var cors = new CorsConfiguration();
+            cors.setAllowedOrigins(List.of("*"));
+            cors.setAllowedMethods(List.of("GET","POST", "PUT", "DELETE", "OPTIONS"));
+            cors.setAllowedHeaders(List.of("*"));
+            return cors;
+        });
+        http.csrf().disable();
+        http.authorizeHttpRequests()
+                .requestMatchers("/api/user/register").permitAll()
+                .requestMatchers("/api/auth/log-in").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        return http.build();
     }
 
     @Bean

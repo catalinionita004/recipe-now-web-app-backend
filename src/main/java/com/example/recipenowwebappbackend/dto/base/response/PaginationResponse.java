@@ -1,15 +1,12 @@
 package com.example.recipenowwebappbackend.dto.base.response;
 
-import com.henry.bookrecommendationsystem.dto.base.BaseDto;
-import com.henry.bookrecommendationsystem.dto.base.pagination.Page;
+import com.example.recipenowwebappbackend.dto.base.BaseDto;
+import com.example.recipenowwebappbackend.dto.base.pagination.Page;
 import lombok.*;
 
 import java.util.List;
 
-/**
- * @author Henry Azer
- * @since 03/11/2022
- */
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data

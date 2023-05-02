@@ -1,13 +1,9 @@
 package com.example.recipenowwebappbackend.service;
 
 
-import com.henry.bookrecommendationsystem.dto.base.request.RefreshTokenRequest;
-import com.henry.bookrecommendationsystem.entity.RefreshToken;
+import com.example.recipenowwebappbackend.dto.base.request.RefreshTokenRequest;
+import com.example.recipenowwebappbackend.entity.RefreshToken;
 
-/**
- * @author Henry Azer
- * @since 05/11/2022
- */
 public interface RefreshTokenService {
     RefreshToken findRefreshTokenByRefreshToken(String refreshToken);
 

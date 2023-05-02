@@ -1,7 +1,7 @@
 package com.example.recipenowwebappbackend.dto.base.request;
 
-import com.henry.bookrecommendationsystem.dto.base.pagination.Page;
-import com.henry.bookrecommendationsystem.dto.base.pagination.SortingBy;
+import com.example.recipenowwebappbackend.dto.base.pagination.Page;
+import com.example.recipenowwebappbackend.dto.base.pagination.SortingBy;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -9,10 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-/**
- * @author Henry Azer
- * @since 03/11/2022
- */
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data

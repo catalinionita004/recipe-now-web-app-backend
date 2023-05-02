@@ -1,22 +1,20 @@
 package com.example.recipenowwebappbackend.controller;
 
-import com.henry.bookrecommendationsystem.dto.base.request.AuthRequest;
-import com.henry.bookrecommendationsystem.dto.base.request.RefreshTokenRequest;
-import com.henry.bookrecommendationsystem.dto.base.response.ApiResponse;
-import com.henry.bookrecommendationsystem.manager.JWTAuthenticationManager;
-import com.henry.bookrecommendationsystem.service.UserService;
+import com.example.recipenowwebappbackend.dto.base.request.AuthRequest;
+import com.example.recipenowwebappbackend.dto.base.request.RefreshTokenRequest;
+import com.example.recipenowwebappbackend.dto.base.response.ApiResponse;
+import com.example.recipenowwebappbackend.manager.JWTAuthenticationManager;
+
+import com.example.recipenowwebappbackend.service.UserService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.time.LocalDateTime;
 
-/**
- * @author Henry Azer
- * @since 04/11/2022
- */
+
 @Slf4j
 @CrossOrigin
 @RestController

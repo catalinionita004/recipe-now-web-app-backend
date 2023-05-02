@@ -1,8 +1,12 @@
 package com.example.recipenowwebappbackend.security.jwt;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.example.recipenowwebappbackend.dto.base.response.ApiResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.henry.bookrecommendationsystem.dto.base.response.ApiResponse;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,18 +14,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.time.LocalDateTime;
 
-/**
- * @author Henry Azer
- * @since 04/11/2022
- */
 @Component
 @AllArgsConstructor
 public class JWTRequestFilter extends OncePerRequestFilter {

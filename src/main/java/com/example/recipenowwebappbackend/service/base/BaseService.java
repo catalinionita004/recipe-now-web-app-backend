@@ -1,22 +1,19 @@
 package com.example.recipenowwebappbackend.service.base;
 
-import com.henry.bookrecommendationsystem.dao.base.BaseDao;
-import com.henry.bookrecommendationsystem.dto.base.BaseDto;
-import com.henry.bookrecommendationsystem.dto.base.request.PaginationRequest;
-import com.henry.bookrecommendationsystem.dto.base.response.PaginationResponse;
-import com.henry.bookrecommendationsystem.entity.base.BaseEntity;
-import com.henry.bookrecommendationsystem.transformer.base.BaseTransformer;
+import com.example.recipenowwebappbackend.dao.base.BaseDao;
+import com.example.recipenowwebappbackend.dto.base.BaseDto;
+import com.example.recipenowwebappbackend.dto.base.request.PaginationRequest;
+import com.example.recipenowwebappbackend.dto.base.response.PaginationResponse;
+import com.example.recipenowwebappbackend.entity.base.BaseEntity;
+import com.example.recipenowwebappbackend.transformer.base.BaseTransformer;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-/**
- * @author Henry Azer
- * @since 03/11/2022
- */
+
 public interface BaseService<Entity extends BaseEntity, Dto extends BaseDto, Dao extends BaseDao, Transformer extends BaseTransformer> {
 
     Dao getDao();

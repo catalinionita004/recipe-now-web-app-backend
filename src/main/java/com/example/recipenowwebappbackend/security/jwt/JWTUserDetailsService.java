@@ -1,7 +1,7 @@
 package com.example.recipenowwebappbackend.security.jwt;
 
-import com.henry.bookrecommendationsystem.dto.UserDto;
-import com.henry.bookrecommendationsystem.service.UserService;
+import com.example.recipenowwebappbackend.dto.UserDto;
+import com.example.recipenowwebappbackend.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,10 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 
-/**
- * @author Henry Azer
- * @since 05/11/2022
- */
+
 @Slf4j
 @Service
 public class JWTUserDetailsService implements UserDetailsService {

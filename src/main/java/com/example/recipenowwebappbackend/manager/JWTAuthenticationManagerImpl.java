@@ -1,10 +1,11 @@
 package com.example.recipenowwebappbackend.manager;
 
-import com.henry.bookrecommendationsystem.dto.base.request.AuthRequest;
-import com.henry.bookrecommendationsystem.dto.base.request.RefreshTokenRequest;
-import com.henry.bookrecommendationsystem.dto.base.response.AuthResponse;
-import com.henry.bookrecommendationsystem.security.jwt.JWTAuthenticationUtil;
-import com.henry.bookrecommendationsystem.service.RefreshTokenService;
+
+import com.example.recipenowwebappbackend.dto.base.request.AuthRequest;
+import com.example.recipenowwebappbackend.dto.base.request.RefreshTokenRequest;
+import com.example.recipenowwebappbackend.dto.base.response.AuthResponse;
+import com.example.recipenowwebappbackend.security.jwt.JWTAuthenticationUtil;
+import com.example.recipenowwebappbackend.service.RefreshTokenService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
@@ -14,10 +15,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-/**
- * @author Henry Azer
- * @since 04/11/2022
- */
+
 @Slf4j
 @Component
 public class JWTAuthenticationManagerImpl implements JWTAuthenticationManager {

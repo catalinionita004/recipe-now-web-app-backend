@@ -1,21 +1,20 @@
 package com.example.recipenowwebappbackend.service;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.henry.bookrecommendationsystem.dao.RefreshTokenDao;
-import com.henry.bookrecommendationsystem.dto.base.request.RefreshTokenRequest;
-import com.henry.bookrecommendationsystem.entity.RefreshToken;
+import com.example.recipenowwebappbackend.dao.RefreshTokenDao;
+import com.example.recipenowwebappbackend.dto.base.request.RefreshTokenRequest;
+import com.example.recipenowwebappbackend.entity.RefreshToken;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+
+
 import java.util.*;
 
-/**
- * @author Henry Azer
- * @since 05/11/2022
- */
+
 @Slf4j
 @Service
 @RequiredArgsConstructor

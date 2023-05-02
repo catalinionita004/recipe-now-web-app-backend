@@ -1,19 +1,13 @@
 package com.example.recipenowwebappbackend.recommender;
 
-import com.henry.bookrecommendationsystem.entity.Book;
-import com.henry.bookrecommendationsystem.repository.BookRepository;
-import com.henry.bookrecommendationsystem.repository.UserBookRatingRepository;
-import com.henry.bookrecommendationsystem.repository.UserRepository;
-import com.henry.bookrecommendationsystem.utils.ValueComparator;
+import com.example.recipenowwebappbackend.entity.Recipe;
+import com.example.recipenowwebappbackend.repository.RecipeRepository;
+import com.example.recipenowwebappbackend.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
 
-/**
- * @author Henry Azer
- * @since 9/11/2022
- */
 @Slf4j
 @Component
 public class CollaborativeFilteringRecommender {
@@ -23,21 +17,20 @@ public class CollaborativeFilteringRecommender {
     private static final int MIN_VALUE_RECOMMENDATION = 4;
 
     private final UserRepository userRepository;
-    private final BookRepository bookRepository;
-    private final UserBookRatingRepository userBookRatingRepository;
+    private final RecipeRepository recipeRepository;
 
     private Map<Long, Map<Long, Integer>> ratings;
     private Map<Long, Double> averageRating;
 
-    public CollaborativeFilteringRecommender(UserRepository userRepository, BookRepository bookRepository, UserBookRatingRepository userBookRatingRepository) {
+    public CollaborativeFilteringRecommender(UserRepository userRepository, RecipeRepository recipeRepository) {
         this.userRepository = userRepository;
-        this.bookRepository = bookRepository;
-        this.userBookRatingRepository = userBookRatingRepository;
+        this.recipeRepository = recipeRepository;
         ratings = new HashMap<>();
         averageRating = new HashMap<>();
     }
 
-    public List<Book> recommendedBooks(Long userId) {
+    /*
+    public List<Recipe> recommendedBooks(Long userId) {
         log.info("CollaborativeFilteringRecommender: recommendedBooks() called - user id: " + userId);
         Map<Long, Double> averageRating = new HashMap<>();
         Map<Long, Map<Long, Integer>> myRatesMap = new TreeMap<>();
@@ -115,6 +108,8 @@ public class CollaborativeFilteringRecommender {
         this.averageRating = averageRating;
     }
 
+
+     */
     /**
      * Get the k-nearest neighbourhoods using Pearson:
      * sim(i,j) = numerator / (sqrt(userDenominator^2) * sqrt(otherUserDenominator^2))
@@ -127,6 +122,7 @@ public class CollaborativeFilteringRecommender {
      * @param userRatings ratings of the user
      * @return nearest neighbourhoods
      */
+    /*
     private Map<Long, Double> getNeighbourhoods(Map<Long, Integer> userRatings) {
         Map<Long, Double> neighbourhoods = new HashMap<>();
         ValueComparator valueComparator = new ValueComparator(neighbourhoods);
@@ -177,6 +173,7 @@ public class CollaborativeFilteringRecommender {
         return output;
     }
 
+     */
     /**
      * Get predictions of each book by a user giving some ratings and its neighbourhood:
      * r(u,i) = r(u) + sum(sim(u,v) * (r(v,i) - r(v))) / sum(abs(sim(u,v)))
@@ -189,6 +186,8 @@ public class CollaborativeFilteringRecommender {
      * @param books          books in the database
      * @return predictions for each book
      */
+
+    /*
     private Map<Long, Double> getRecommendations(Map<Long, Integer> userRatings, Map<Long, Double> neighbourhoods, Map<Long, String> books) {
         Map<Long, Double> predictedRatings = new HashMap<>();
 
@@ -223,8 +222,11 @@ public class CollaborativeFilteringRecommender {
                 predictedRatings.put(bookId, predictedRating);
             }
         }
+
         return predictedRatings;
     }
+
+     */
 
     /**
      * Get average of the ratings of a user
@@ -232,6 +234,8 @@ public class CollaborativeFilteringRecommender {
      * @param userRatings ratings of a user
      * @return average or the ratings of a user
      */
+
+    /*
     private double getAverage(Map<Long, Integer> userRatings) {
         double userAverage = 0;
         for (Map.Entry<Long, Integer> longIntegerEntry : userRatings.entrySet()) {
@@ -239,4 +243,8 @@ public class CollaborativeFilteringRecommender {
         }
         return userAverage / userRatings.size();
     }
+
+     */
 }
+
+

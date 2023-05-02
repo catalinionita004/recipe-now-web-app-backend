@@ -1,15 +1,13 @@
 package com.example.recipenowwebappbackend.dao;
 
-import com.henry.bookrecommendationsystem.dao.base.BaseDao;
-import com.henry.bookrecommendationsystem.entity.User;
-import com.henry.bookrecommendationsystem.repository.UserRepository;
+
+import com.example.recipenowwebappbackend.dao.base.BaseDao;
+import com.example.recipenowwebappbackend.entity.User;
+import com.example.recipenowwebappbackend.repository.UserRepository;
 
 import java.util.Optional;
 
-/**
- * @author Henry Azer
- * @since 04/11/2022
- */
+
 public interface UserDao extends BaseDao<User, UserRepository> {
     Optional<User> findUserByEmail(String email);
 

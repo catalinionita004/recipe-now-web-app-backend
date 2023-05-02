@@ -1,13 +1,10 @@
 package com.example.recipenowwebappbackend.dao;
 
-import com.henry.bookrecommendationsystem.entity.RefreshToken;
+import com.example.recipenowwebappbackend.entity.RefreshToken;
 
 import java.util.Optional;
 
-/**
- * @author Henry Azer
- * @since 05/11/2022
- */
+
 public interface RefreshTokenDao {
     Optional<RefreshToken> findRefreshTokenByEmail(String email);
 

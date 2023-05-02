@@ -1,17 +1,15 @@
 package com.example.recipenowwebappbackend.entity;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+
 import java.util.Date;
 
-/**
- * @author Henry Azer
- * @since 05/11/2022
- */
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

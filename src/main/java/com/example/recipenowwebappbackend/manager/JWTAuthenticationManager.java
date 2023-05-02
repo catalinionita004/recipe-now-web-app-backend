@@ -1,13 +1,9 @@
 package com.example.recipenowwebappbackend.manager;
 
-import com.henry.bookrecommendationsystem.dto.base.request.AuthRequest;
-import com.henry.bookrecommendationsystem.dto.base.request.RefreshTokenRequest;
-import com.henry.bookrecommendationsystem.dto.base.response.AuthResponse;
+import com.example.recipenowwebappbackend.dto.base.request.AuthRequest;
+import com.example.recipenowwebappbackend.dto.base.request.RefreshTokenRequest;
+import com.example.recipenowwebappbackend.dto.base.response.AuthResponse;
 
-/**
- * @author Henry Azer
- * @since 04/11/2022
- */
 public interface JWTAuthenticationManager {
     AuthResponse login(AuthRequest authRequest);
 

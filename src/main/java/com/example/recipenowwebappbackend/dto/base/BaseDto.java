@@ -6,10 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-/**
- * @author Henry Azer
- * @since 03/11/2022
- */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

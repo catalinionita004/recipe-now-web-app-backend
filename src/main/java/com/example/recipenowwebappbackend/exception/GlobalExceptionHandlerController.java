@@ -1,7 +1,7 @@
 package com.example.recipenowwebappbackend.exception;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.henry.bookrecommendationsystem.dto.base.response.ApiResponse;
+import com.example.recipenowwebappbackend.dto.base.response.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -14,10 +14,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Objects;
 
-/**
- * @author Henry Azer
- * @since 03/11/2022
- */
+
 @Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandlerController extends ResponseEntityExceptionHandler {

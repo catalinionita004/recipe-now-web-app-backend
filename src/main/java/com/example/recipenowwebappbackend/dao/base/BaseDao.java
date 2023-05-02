@@ -1,9 +1,10 @@
 package com.example.recipenowwebappbackend.dao.base;
 
-import com.henry.bookrecommendationsystem.dto.base.pagination.SortingBy;
-import com.henry.bookrecommendationsystem.dto.base.pagination.SortingDirection;
-import com.henry.bookrecommendationsystem.dto.base.request.PaginationRequest;
-import com.henry.bookrecommendationsystem.entity.base.BaseEntity;
+
+import com.example.recipenowwebappbackend.dto.base.pagination.SortingBy;
+import com.example.recipenowwebappbackend.dto.base.pagination.SortingDirection;
+import com.example.recipenowwebappbackend.dto.base.request.PaginationRequest;
+import com.example.recipenowwebappbackend.entity.base.BaseEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -16,10 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-/**
- * @author Henry Azer
- * @since 03/11/2022
- */
+
 public interface BaseDao<Entity extends BaseEntity, Repository extends JpaRepository<Entity, Long>> {
 
     Repository getRepository();

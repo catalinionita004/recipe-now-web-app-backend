@@ -3,10 +3,7 @@ package com.example.recipenowwebappbackend.utils;
 import java.util.Comparator;
 import java.util.Map;
 
-/**
- * @author Henry Azer
- * @since 10/11/2022
- */
+
 public class ValueComparator implements Comparator<Long> {
     private final Map<Long, Double> base;
 

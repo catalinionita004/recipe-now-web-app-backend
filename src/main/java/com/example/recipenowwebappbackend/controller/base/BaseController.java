@@ -1,11 +1,8 @@
 package com.example.recipenowwebappbackend.controller.base;
 
-import com.henry.bookrecommendationsystem.service.base.BaseService;
 
-/**
- * @author Henry Azer
- * @since 03/11/2022
- */
+import com.example.recipenowwebappbackend.service.base.BaseService;
+
 public interface BaseController<Service extends BaseService> {
     Service getService();
 }
