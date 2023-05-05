@@ -40,10 +40,10 @@ public class Recipe implements Serializable {
     private User user;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe", cascade = {CascadeType.MERGE})
-    private List<Interaction> interactionList;
+    private Set<Interaction> interactions;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe", cascade = {CascadeType.MERGE})
-    private List<RecipeStep> recipeStepList;
+    private Set<RecipeStep> recipeSteps;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "recipe", cascade = {CascadeType.MERGE})
     private Nutrition nutrition;
@@ -61,3 +61,4 @@ public class Recipe implements Serializable {
     private Set<Tag> tags = new HashSet<>();
 
 }
+

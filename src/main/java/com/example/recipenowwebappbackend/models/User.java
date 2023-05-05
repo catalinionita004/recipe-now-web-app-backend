@@ -46,14 +46,6 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private int enabled;
 
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade={CascadeType.MERGE})
-    private List<Recipe> recipeList;
-
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade={CascadeType.MERGE})
-    private List<Interaction> interactionList;
-
     public User(String firstName, String lastName, String username, String email, String password, Role role, int enabled) {
         this.firstName = firstName;
         this.lastName = lastName;

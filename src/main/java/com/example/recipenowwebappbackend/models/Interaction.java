@@ -25,12 +25,11 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
-public class Interaction  {
+public class Interaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -50,3 +49,4 @@ public class Interaction  {
     private String review;
 
 }
+

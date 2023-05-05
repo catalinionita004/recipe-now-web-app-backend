@@ -2,10 +2,10 @@ package com.example.recipenowwebappbackend.controllers;
 
 
 import com.example.recipenowwebappbackend.exceptions.UserException;
-import com.example.recipenowwebappbackend.models.AuthenticationRequest;
-import com.example.recipenowwebappbackend.models.AuthenticationResponse;
+import com.example.recipenowwebappbackend.models.auth.AuthenticationRequest;
+import com.example.recipenowwebappbackend.models.auth.AuthenticationResponse;
 import com.example.recipenowwebappbackend.services.impl.UserService;
-import com.example.recipenowwebappbackend.utils.JwtUtil;
+import com.example.recipenowwebappbackend.security.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,9 +26,6 @@ public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest) throws UserException {
-        if (!userDetailsService.findByUsername(authenticationRequest.username()).isEnabled())
-            throw new UserException("User is not enabled!");
-
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authenticationRequest.username(), authenticationRequest.password())

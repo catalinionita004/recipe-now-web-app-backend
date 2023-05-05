@@ -1,4 +1,4 @@
-package com.example.recipenowwebappbackend.utils;
+package com.example.recipenowwebappbackend.security.utils;
 
 
 import io.jsonwebtoken.*;

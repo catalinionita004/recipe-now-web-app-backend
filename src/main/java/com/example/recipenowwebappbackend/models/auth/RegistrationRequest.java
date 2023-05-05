@@ -1,4 +1,4 @@
-package com.example.recipenowwebappbackend.models;
+package com.example.recipenowwebappbackend.models.auth;
 
 import java.io.Serializable;
 import java.util.List;

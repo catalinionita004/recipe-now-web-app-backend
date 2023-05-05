@@ -23,7 +23,4 @@ public class Tag {
     @Column(name = "name",nullable = false)
     private String name;
 
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tags", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Recipe> recipes = new HashSet<>();
 }

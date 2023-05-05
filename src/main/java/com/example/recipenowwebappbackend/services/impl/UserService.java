@@ -1,13 +1,17 @@
 package com.example.recipenowwebappbackend.services.impl;
 
 
+import com.example.recipenowwebappbackend.dtos.UserDto;
 import com.example.recipenowwebappbackend.exceptions.UserAlreadyExistException;
 import com.example.recipenowwebappbackend.exceptions.UserException;
+import com.example.recipenowwebappbackend.exceptions.UserNotFoundException;
+import com.example.recipenowwebappbackend.mappers.UserMapper;
+import com.example.recipenowwebappbackend.models.auth.AuthenticationResponse;
+import com.example.recipenowwebappbackend.models.auth.RegistrationRequest;
 import com.example.recipenowwebappbackend.repositories.UserRepository;
 import com.example.recipenowwebappbackend.models.*;
-import com.example.recipenowwebappbackend.utils.JwtUtil;
+import com.example.recipenowwebappbackend.security.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,7 +20,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -24,18 +27,20 @@ public class UserService implements UserDetailsService {
     private UserRepository userRepository;
     @Autowired
     private JwtUtil jwtTokenUtil;
-    private User currentUser;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-//    @Autowired
-//    private ConfigurationRepository configurationRepository;
+    @Autowired
+    private UserMapper userMapper;
+
+    private User userCurrent;
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username).orElseThrow(() ->
                 new UsernameNotFoundException("User not found for " + username));
-        currentUser = user;
+        userCurrent=user;
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.getAuthorities());
     }
 
@@ -68,8 +73,9 @@ public class UserService implements UserDetailsService {
         );
     }
 
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+    public UserDto findByUsername(String username) {
+        return userMapper.modelToDto(userRepository.findByUsername(username).orElseThrow(() ->
+                new UsernameNotFoundException("User not found with username: " + username)));
     }
 
     public void enableUser(String username) {
@@ -84,6 +90,10 @@ public class UserService implements UserDetailsService {
 
     public void updateUserRole(String username, String role) {
         userRepository.updateUserRole(username, Role.valueOf(role));
+    }
+
+    public UserDto getCurrentUser() {
+        return userMapper.modelToDto(userCurrent);
     }
 
 //    public List<User> getOrderByPage(Integer page) {

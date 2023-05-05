@@ -1,7 +1,7 @@
 package com.example.recipenowwebappbackend.controllers;
 
 import com.example.recipenowwebappbackend.exceptions.UserAlreadyExistException;
-import com.example.recipenowwebappbackend.models.RegistrationRequest;
+import com.example.recipenowwebappbackend.models.auth.RegistrationRequest;
 import com.example.recipenowwebappbackend.services.impl.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,6 @@ public class RegistrationController {
     @PostMapping(value = "/register")
     public ResponseEntity<Object> createRegistrationRequest(@RequestBody RegistrationRequest registrationRequest) throws UserAlreadyExistException {
         logger.log(Level.INFO, "new user registered " + registrationRequest);
-        //return ResponseEntity.ok(userService.register(registrationRequest));
         return new ResponseEntity<>(userService.register(registrationRequest), HttpStatus.OK);
     }
 }

@@ -1,7 +1,7 @@
-package com.example.recipenowwebappbackend.config;
+package com.example.recipenowwebappbackend.security.config;
 
 
-import com.example.recipenowwebappbackend.filters.JwtRequestFilter;
+import com.example.recipenowwebappbackend.security.filters.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

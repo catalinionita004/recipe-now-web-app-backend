@@ -1,6 +1,8 @@
 package com.example.recipenowwebappbackend.controllers;
 
 
+import com.example.recipenowwebappbackend.dtos.UserDto;
+import com.example.recipenowwebappbackend.exceptions.UserNotFoundException;
 import com.example.recipenowwebappbackend.models.SetupPaginator;
 import com.example.recipenowwebappbackend.models.UserFilter;
 import com.example.recipenowwebappbackend.services.impl.UserService;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("api/user")
 @CrossOrigin
 public class UserController {
     @Autowired
@@ -29,9 +31,13 @@ public class UserController {
         return ResponseEntity.ok(userService.findAllUsers());
     }
 
-    @GetMapping("/{username}")
-    public ResponseEntity<?> findByUsername(@PathVariable String username) {
-        return ResponseEntity.ok(userService.findByUsername(username));
+    @GetMapping("/current")
+    public ResponseEntity<UserDto> getCurrentUser() {
+        return new ResponseEntity<>(userService.getCurrentUser(), HttpStatus.FOUND);
+    }
+    @GetMapping("/username/{username}")
+    public ResponseEntity<UserDto> findByUsername(@PathVariable String username) {
+        return new ResponseEntity<>(userService.findByUsername(username), HttpStatus.FOUND);
     }
 
     @PutMapping("/role")
