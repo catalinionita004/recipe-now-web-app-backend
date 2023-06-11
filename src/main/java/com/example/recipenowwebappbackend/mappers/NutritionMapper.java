@@ -4,6 +4,7 @@ package com.example.recipenowwebappbackend.mappers;
 import com.example.recipenowwebappbackend.dtos.NutritionDto;
 import com.example.recipenowwebappbackend.mappers.base.BaseMapper;
 import com.example.recipenowwebappbackend.models.Nutrition;
+import com.example.recipenowwebappbackend.models.Recipe;
 import org.springframework.stereotype.Component;
 
 
@@ -30,7 +31,17 @@ public class NutritionMapper implements BaseMapper<NutritionDto, Nutrition> {
 
     @Override
     public Nutrition dtoToModel(NutritionDto nutritionDto) {
-        return null;
+        return new Nutrition(
+                nutritionDto.getId(),
+               null,
+                nutritionDto.getCalories(),
+                nutritionDto.getFat(),
+                nutritionDto.getSaturatedFat(),
+                nutritionDto.getCarbohydrates(),
+                nutritionDto.getFiber(),
+                nutritionDto.getProtein(),
+                nutritionDto.getSodium()
+        );
     }
 
     @Override
@@ -39,7 +50,7 @@ public class NutritionMapper implements BaseMapper<NutritionDto, Nutrition> {
     }
 
     @Override
-    public List<Nutrition> dtosToModels(List<NutritionDto> nutritionDtos) {
+    public Set<Nutrition> dtosToModels(List<NutritionDto> nutritionDtos) {
         return null;
     }
 }

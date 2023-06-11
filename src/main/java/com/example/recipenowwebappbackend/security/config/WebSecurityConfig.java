@@ -41,12 +41,11 @@ public class WebSecurityConfig {
         });
         http.csrf().disable();
         http.authorizeHttpRequests()
-                .requestMatchers("/login").permitAll()
-                .requestMatchers("/register").permitAll()
-                .requestMatchers("/configurations").permitAll()
-                .requestMatchers("/configurations/**").hasRole("ADMIN")
-                .requestMatchers("/items").hasAnyRole("ADMIN", "EDITOR")
-                .requestMatchers("/users/**").hasRole("ADMIN")
+                .requestMatchers("/api/auth/login").permitAll()
+                .requestMatchers("/api/auth/register").permitAll()
+                .requestMatchers("/api/recipe/**").permitAll()
+                .requestMatchers("/api/tag/**").permitAll()
+                .requestMatchers("/api/ingredient/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint).and()

@@ -12,5 +12,5 @@ public interface BaseMapper<Dto,Model>{
     Dto modelToDto (Model model);
     Model dtoToModel(Dto dto);
     List<Dto> modelsToDtos(Set<Model> models);
-    List<Model> dtosToModels(List<Dto> dtos);
+    Set<Model> dtosToModels(List<Dto> dtos);
 }

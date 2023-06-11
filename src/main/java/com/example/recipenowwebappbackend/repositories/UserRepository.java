@@ -1,6 +1,7 @@
 package com.example.recipenowwebappbackend.repositories;
 
 
+import com.example.recipenowwebappbackend.dtos.UserDtoLite;
 import com.example.recipenowwebappbackend.models.Role;
 import com.example.recipenowwebappbackend.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -31,4 +32,9 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long>, 
     void updateUserRole(@Param("username") String username, @Param("role") Role role);
 
     List<User> findAll();
+
+
+    @Query("SELECT u.id as id, u.firstName as firstName, u.lastName as lastName FROM User u")
+    List<Object[]> findUsersDtoLite();
+
 }

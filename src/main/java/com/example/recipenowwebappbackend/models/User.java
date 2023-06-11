@@ -29,20 +29,18 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String lastName;
 
-    @JsonIgnore
     @Column(nullable = false)
     private String username;
-    @JsonIgnore
+
     @Column(nullable = false)
     private String email;
 
-    @JsonIgnore
     @Column(nullable = false)
     private String password;
-    @JsonIgnore
+
     @Column(nullable = false)
     private Role role;
-    @JsonIgnore
+
     @Column(nullable = false)
     private int enabled;
 
@@ -54,6 +52,14 @@ public class User implements UserDetails {
         this.password = password;
         this.role = role;
         this.enabled = enabled;
+    }
+
+    public User(Long id,String firstName, String lastName, String username, String email) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.email = email;
     }
 
     public User(String username) {

@@ -22,4 +22,8 @@ public class Ingredient {
 
     @Column(name = "name",nullable = false)
     private String name;
+
+    public Ingredient(String name) {
+        this.name=name;
+    }
 }

@@ -18,7 +18,6 @@ public class RecipeStep {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recipe_id", nullable = false)
     private Recipe recipe;
@@ -28,4 +27,14 @@ public class RecipeStep {
 
     @Column(name = "step_description")
     private String stepDescription;
+
+    @Override
+    public String toString() {
+        return "RecipeStep{" +
+                "id=" + id +
+                ", recipeID=" + recipe.getId() +
+                ", stepNumber=" + stepNumber +
+                ", stepDescription='" + stepDescription + '\'' +
+                '}';
+    }
 }

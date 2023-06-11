@@ -23,4 +23,7 @@ public class Tag {
     @Column(name = "name",nullable = false)
     private String name;
 
+    public Tag(String name) {
+        this.name=name;
+    }
 }

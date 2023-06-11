@@ -1,7 +1,7 @@
 package com.example.recipenowwebappbackend.security.filters;
 
 
-import com.example.recipenowwebappbackend.services.impl.UserService;
+import com.example.recipenowwebappbackend.services.UserService;
 import com.example.recipenowwebappbackend.security.utils.JwtUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureException;

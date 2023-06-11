@@ -3,6 +3,6 @@ CREATE TABLE IF NOT EXISTS recipe (
                                                   name text,
                                                   minutes integer,
                                                   author_id bigint,
-                                                  submitted DATE,
+                                                  submitted timestamp,
                                                   description text
 );

@@ -1,4 +1,4 @@
-package com.example.recipenowwebappbackend.services.impl;
+package com.example.recipenowwebappbackend.services;
 
 import com.example.recipenowwebappbackend.models.Interaction;
 import com.example.recipenowwebappbackend.repositories.InteractionRepository;

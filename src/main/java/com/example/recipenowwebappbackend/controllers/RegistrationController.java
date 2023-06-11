@@ -1,25 +1,31 @@
 package com.example.recipenowwebappbackend.controllers;
 
+import com.example.recipenowwebappbackend.dtos.ApiResponse;
 import com.example.recipenowwebappbackend.exceptions.UserAlreadyExistException;
 import com.example.recipenowwebappbackend.models.auth.RegistrationRequest;
-import com.example.recipenowwebappbackend.services.impl.UserService;
+import com.example.recipenowwebappbackend.services.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-@RestController
+@Slf4j
 @CrossOrigin
+@RestController
 @AllArgsConstructor
+@RequestMapping("/api/auth")
 public class RegistrationController {
     private final UserService userService;
     private final Logger logger = Logger.getLogger(RegistrationController.class.getName());
 
     @PostMapping(value = "/register")
-    public ResponseEntity<Object> createRegistrationRequest(@RequestBody RegistrationRequest registrationRequest) throws UserAlreadyExistException {
+    public ApiResponse createRegistrationRequest(@RequestBody RegistrationRequest registrationRequest) throws UserAlreadyExistException {
         logger.log(Level.INFO, "new user registered " + registrationRequest);
-        return new ResponseEntity<>(userService.register(registrationRequest), HttpStatus.OK);
+
+        return new ApiResponse(true, LocalDateTime.now().toString(),
+                "Register user successfully", userService.register(registrationRequest));
     }
 }

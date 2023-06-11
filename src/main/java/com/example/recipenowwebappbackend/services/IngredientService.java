@@ -1,11 +1,17 @@
-package com.example.recipenowwebappbackend.services.impl;
+package com.example.recipenowwebappbackend.services;
 
 import com.example.recipenowwebappbackend.dtos.IngredientDto;
 import com.example.recipenowwebappbackend.exceptions.ResourceNotFoundException;
 import com.example.recipenowwebappbackend.mappers.IngredientMapper;
+import com.example.recipenowwebappbackend.models.Ingredient;
 import com.example.recipenowwebappbackend.repositories.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -24,6 +30,7 @@ public class IngredientService {
     }
 
 
-
-
+    public List<IngredientDto> findIngredientByName(String name) {
+        return ingredientMapper.modelsToDtos(new HashSet<>(ingredientRepository.findByNameStartingWith(name, PageRequest.of(0, 10))));
+    }
 }

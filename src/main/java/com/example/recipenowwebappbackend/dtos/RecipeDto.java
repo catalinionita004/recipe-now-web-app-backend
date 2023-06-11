@@ -1,15 +1,8 @@
 package com.example.recipenowwebappbackend.dtos;
 
-import com.example.recipenowwebappbackend.models.Ingredient;
-import com.example.recipenowwebappbackend.models.Interaction;
-import com.example.recipenowwebappbackend.models.Nutrition;
-import com.example.recipenowwebappbackend.models.RecipeStep;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -17,11 +10,13 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class RecipeDto {
     private Long id;
     private String name;
     private Integer minutes;
-    private Date submitted;
+    private LocalDateTime submitted;
+    private LocalDateTime editDate;
     private String description;
     private UserDto user;
     private List<InteractionDto> interactions;
@@ -29,4 +24,6 @@ public class RecipeDto {
     private NutritionDto nutrition;
     private List<IngredientDto> ingredients;
     private List<TagDto> tags;
+    private Double averageRating;
+    private Integer ratingCount;
 }

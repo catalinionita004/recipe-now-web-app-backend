@@ -36,7 +36,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<?> handleResourceNotFoundException(ResourceNotFoundException exception, WebRequest request) {
         ErrorDetails errorDetails =
-                new ErrorDetails(new Date(), "resource-not-found-exception", exception.getMessage(), String.valueOf(HttpStatus.NOT_FOUND.value()));
+                new ErrorDetails(new Date(), "resource-not-found-exception", exception.getMessage(), String.valueOf(HttpStatus.NOT_FOUND.value()),false);
 
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
@@ -51,7 +51,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleGlobalException(Exception exception, WebRequest request) {
         ErrorDetails errorDetails =
-                new ErrorDetails(new Date(), "global-exception", exception.getMessage(), String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()));
+                new ErrorDetails(new Date(), "global-exception", exception.getMessage(), String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()),false);
 
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -70,7 +70,7 @@ public class GlobalExceptionHandler {
             messages.append(error.getDefaultMessage()).append(";");
         });
         ErrorDetails errorDetails =
-                new ErrorDetails(new Date(), "bad-request", messages.toString(), String.valueOf(HttpStatus.BAD_REQUEST.value()));
+                new ErrorDetails(new Date(), "bad-request", messages.toString(), String.valueOf(HttpStatus.BAD_REQUEST.value()),false);
 
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
@@ -83,7 +83,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UserAlreadyExistException.class)
     public ResponseEntity<?> handleUserAlreadyExistException(UserAlreadyExistException exception, WebRequest request) {
         ErrorDetails errorDetails =
-                new ErrorDetails(new Date(), "user-already-exist-exception", exception.getMessage(), String.valueOf(HttpStatus.CONFLICT.value()));
+                new ErrorDetails(new Date(), "user-already-exist-exception", exception.getMessage(), String.valueOf(HttpStatus.CONFLICT.value()),false);
 
         return new ResponseEntity<>(errorDetails, HttpStatus.CONFLICT);
     }
@@ -92,7 +92,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UserException.class)
     public ResponseEntity<?> handleUserException(UserException exception, WebRequest request) {
         ErrorDetails errorDetails =
-                new ErrorDetails(new Date(), "user-exception", exception.getMessage(), String.valueOf(HttpStatus.BAD_REQUEST.value()));
+                new ErrorDetails(new Date(), "user-exception", exception.getMessage(), String.valueOf(HttpStatus.BAD_REQUEST.value()),false);
 
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }

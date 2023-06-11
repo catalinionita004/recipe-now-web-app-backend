@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -34,19 +35,21 @@ public class Interaction {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recipe_id", nullable = false)
     private Recipe recipe;
 
     @Column(name= "date",nullable = false)
-    private Date date;
+    private LocalDateTime submitted;
+
+    @Column(name= "edit_date",nullable = false)
+    private LocalDateTime editDate;
+
 
     @Column(name = "rating")
     private Integer rating;
 
     @Column(name = "review")
     private String review;
-
 }
 

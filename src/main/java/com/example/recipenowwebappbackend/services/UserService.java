@@ -1,7 +1,8 @@
-package com.example.recipenowwebappbackend.services.impl;
+package com.example.recipenowwebappbackend.services;
 
 
 import com.example.recipenowwebappbackend.dtos.UserDto;
+import com.example.recipenowwebappbackend.exceptions.ResourceNotFoundException;
 import com.example.recipenowwebappbackend.exceptions.UserAlreadyExistException;
 import com.example.recipenowwebappbackend.exceptions.UserException;
 import com.example.recipenowwebappbackend.exceptions.UserNotFoundException;
@@ -48,9 +49,16 @@ public class UserService implements UserDetailsService {
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         try {
+            //@TODO ACTUALIZARE
             userRepository.save(user);
         } catch (Exception e) {
-            throw new UserAlreadyExistException("User already exist");
+            if (e.getMessage().contains("recipe_user_username_key")) {
+                throw new UserAlreadyExistException("Username already exists");
+            } else if (e.getMessage().contains("recipe_user_email_key")) {
+                throw new UserAlreadyExistException("Email already exists");
+            } else {
+                throw new UserAlreadyExistException("User already exists");
+            }
         }
 
         return new AuthenticationResponse(jwtTokenUtil.generateToken(user));
@@ -78,22 +86,27 @@ public class UserService implements UserDetailsService {
                 new UsernameNotFoundException("User not found with username: " + username)));
     }
 
-    public void enableUser(String username) {
-        userRepository.findByUsername(username).orElseThrow(() ->
-                new UsernameNotFoundException("User not found for " + username));
-        userRepository.enableUser(username);
-    }
+//    public void enableUser(String username) {
+//        userRepository.findByUsername(username).orElseThrow(() ->
+//                new UsernameNotFoundException("User not found for " + username));
+//        userRepository.enableUser(username);
+//    }
 
     public List<User> findAllUsers() {
         return userRepository.findAll();
     }
 
-    public void updateUserRole(String username, String role) {
-        userRepository.updateUserRole(username, Role.valueOf(role));
-    }
+//    public void updateUserRole(String username, String role) {
+//        userRepository.updateUserRole(username, Role.valueOf(role));
+//    }
 
     public UserDto getCurrentUser() {
         return userMapper.modelToDto(userCurrent);
+    }
+
+    public UserDto findById(Long userId) {
+        return userMapper.modelToDto(userRepository.findById(userId).orElseThrow(() ->
+                new ResourceNotFoundException("User not found with id " + userId)));
     }
 
 //    public List<User> getOrderByPage(Integer page) {

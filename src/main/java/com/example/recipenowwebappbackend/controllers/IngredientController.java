@@ -1,16 +1,14 @@
 package com.example.recipenowwebappbackend.controllers;
 
 
-import com.example.recipenowwebappbackend.dtos.IngredientDto;
-import com.example.recipenowwebappbackend.services.impl.IngredientService;
+import com.example.recipenowwebappbackend.dtos.ApiResponse;
+import com.example.recipenowwebappbackend.services.IngredientService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Slf4j
 @CrossOrigin
@@ -24,8 +22,18 @@ public class IngredientController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<IngredientDto> getIngredientById(@PathVariable Long id) {
-        return new ResponseEntity<>(ingredientService.findIngredientById(id), HttpStatus.FOUND);
+    public ApiResponse getIngredientById(@PathVariable Long id) {
+        return new ApiResponse(true, LocalDateTime.now().toString(),
+                "FIND ingredient with id" + id, ingredientService.findIngredientById(id));
     }
+
+    @GetMapping("/name")
+    public ApiResponse  getIngredientByName(@RequestParam String name) {
+        return new ApiResponse(true, LocalDateTime.now().toString(),
+                "FIND ingredients starting with name" + name, ingredientService.findIngredientByName(name));
+    }
+
+
+
 
 }
