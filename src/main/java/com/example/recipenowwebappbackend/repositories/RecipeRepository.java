@@ -1,12 +1,6 @@
 package com.example.recipenowwebappbackend.repositories;
 
-import com.example.recipenowwebappbackend.dtos.RecipeSearchDto;
-import com.example.recipenowwebappbackend.models.Ingredient;
 import com.example.recipenowwebappbackend.models.Recipe;
-import com.example.recipenowwebappbackend.models.Tag;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -16,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Set;
+
 
 @Transactional
 @Repository
@@ -40,6 +34,10 @@ public interface RecipeRepository extends PagingAndSortingRepository<Recipe, Lon
             "WHERE r.user.id = :userId " +
             "GROUP BY r.id")
     List<Object[]> findRecipesLiteByUser(@Param("userId") Long userId);
+    @Query("SELECT r.id FROM Recipe r " +
+            "JOIN Interaction ri ON r.id = ri.recipe.id  " +
+            "WHERE ri.user.id = :userId")
+    List<Long> findReviewedRecipeIdsByUser(@Param("userId") Long userId);
 
 
     @Query("SELECT DISTINCT r.id " +

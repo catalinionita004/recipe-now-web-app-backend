@@ -124,6 +124,29 @@ public class RecipeService {
         });
     }
 
+    private List<RecipeLiteDto> findReviewedRecipesByUser(Long userId) {
+        List<Long> results = recipeRepository.findReviewedRecipeIdsByUser(userId);
+        List<RecipeLiteDto> recipeLiteDtos = new ArrayList<>();
+
+        recipeLiteDtos.sort((recipe1, recipe2) -> {
+            LocalDateTime date1 = (recipe1.getSubmitted() != null) ? recipe1.getSubmitted() : recipe1.getEditDate();
+            LocalDateTime date2 = (recipe2.getSubmitted() != null) ? recipe2.getSubmitted() : recipe2.getEditDate();
+
+            if (date1 == null && date2 == null) {
+                return 0;
+            } else if (date1 == null) {
+                return 1;
+            } else if (date2 == null) {
+                return -1;
+            } else {
+                return date2.compareTo(date1); // sortare descrescatoare
+            }
+        });
+
+        return recipeLiteDtos;
+    }
+
+
 
     public RecipeDto findRecipeById(Long id) {
         Recipe recipe = recipeRepository.findById(id).orElseThrow(() ->
@@ -150,6 +173,17 @@ public class RecipeService {
         int start = (int) page.getOffset();
         int end = Math.min((start + page.getPageSize()), recommendedRecipes.size());
         return new PageImpl<>(recommendedRecipes.subList(start, end), page, recommendedRecipes.size());
+    }
+
+
+    public Page<RecipeLiteDto> findReviewedRecipes(Pageable page) {
+        UserDto currentUser = userService.getCurrentUser();
+        List<RecipeLiteDto> reviewedRecipes = findReviewedRecipesByUser(currentUser.getId());
+        if (page.getPageNumber() * page.getPageSize() > reviewedRecipes.size())
+            return new PageImpl<>(new ArrayList<>());
+        int start = (int) page.getOffset();
+        int end = Math.min((start + page.getPageSize()), reviewedRecipes.size());
+        return new PageImpl<>(reviewedRecipes.subList(start, end), page, reviewedRecipes.size());
     }
 
 
@@ -191,6 +225,7 @@ public class RecipeService {
         }
         throw new ResourceNotFoundException("Recipe not found with id " + id);
     }
+
 
     public List<RecipeLiteDto> findAllRecipesByUser(Long userId) {
         List<Object[]> results = recipeRepository.findRecipesLiteByUser(userId);
@@ -304,5 +339,7 @@ public class RecipeService {
         List<RecipeLiteDto> recipeLiteDtos = typedQuery.getResultList().stream().map(recipeSearchDto -> recipeLiteDtoMap.get(recipeSearchDto.getId())).collect(Collectors.toList());
         return new PageImpl<>(recipeLiteDtos, pageable, totalCount);
     }
+
+
 }
 

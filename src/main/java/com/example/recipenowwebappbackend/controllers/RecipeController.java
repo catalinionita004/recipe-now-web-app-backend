@@ -33,9 +33,14 @@ public class RecipeController {
 
     @GetMapping("/find-all-recommended")
     public ApiResponse findAllRecommendedRecipes(Pageable page) {
-        System.out.println("salut de aici " + page.getPageNumber() + " " + page.getPageSize());
         return new ApiResponse(true, LocalDateTime.now().toString(),
                 "FIND ALL recommended recipes", (recipeService.findAllRecommendedRecipes(page)));
+    }
+
+    @GetMapping("/find-reviewed-recipes")
+    public ApiResponse findReviewedRecipes(Pageable page) {
+        return new ApiResponse(true, LocalDateTime.now().toString(),
+                "FIND ALL reviewed recipes", (recipeService.findReviewedRecipes(page)));
     }
 
     @PostMapping
