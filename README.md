@@ -1,3 +1,11 @@
+# 🍽️ Recipe Now Web App Backend
+
+Welcome to the backend repository for the Recipe Now Web App! Check out our frontend application live at the link below:
+
+🌟 **Live Demo** 🌟
+
+[![Recipe Now](https://img.shields.io/badge/Recipe%20Now-Live%20Demo-brightgreen?style=for-the-badge)](https://recipe-now-frontend-s7qlbu7unq-ez.a.run.app/)
+
 # RecipeNow app - Recipe Recommendation System 
 
 ## Overview
