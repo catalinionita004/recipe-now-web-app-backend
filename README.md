@@ -32,18 +32,25 @@ Welcome to the RecipeNow repository! This project implements a user-based collab
 - 🧠 **Development of the User-Based Collaborative Filtering Model**.
 - 🎨 **Design and Implementation of the Web Interface** for recipe recommendations.
 - 🚀 **Suggestions for Enhancing System Performance** and expanding application areas.
-
+- 
 ## 🛠️ Technologies Used
 
-### 🖥️ Programming Languages
-- ![Java](https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white) 
-- ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-- ![CSS](https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white) 
-- ![HTML](https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white) 
+### 🖥️ Programming Language
+- ![Java](https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=java&logoColor=white)
 
 ### 📚 Libraries/Frameworks
-- ![Spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white) 
-- ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+- ![Spring](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
+- ![Liquibase](https://img.shields.io/badge/Liquibase-006CD3?style=for-the-badge&logo=liquibase&logoColor=white)
+- ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)
+- ![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jwt&logoColor=white)
+
+### ⚙️ Additional Tools
+- **Liquibase** for database migrations and version control.
+- **PostgreSQL** as the primary database management system.
+- **JWT (JSON Web Tokens)** for securing API endpoints and authentication.
+
+These technologies and tools were chosen to ensure a robust, scalable, and secure application. The combination of Java and Spring provides a strong backend framework. Liquibase and PostgreSQL together offer reliable data management solutions, and JWT tokens enhance the security of the application.
+
 
 ### 📊 Data Analysis
 - **Data collection, cleaning, exploratory data analysis**
