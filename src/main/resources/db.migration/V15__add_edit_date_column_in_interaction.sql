@@ -1,1 +1,1 @@
-ALTER TABLE recipe_interaction ADD COLUMN edit_date timestamp;
+ALTER TABLE recipe_interaction ADD COLUMN edit_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP;

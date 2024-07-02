@@ -41,6 +41,7 @@ public class RecipeMapper implements BaseMapper<RecipeDto, Recipe> {
                 recipe.getSubmitted(),
                 recipe.getEditDate(),
                 recipe.getDescription(),
+                recipe.getImageUrl(),
                 userMapper.modelToDto(recipe.getUser()),
                 interactionMapper.modelsToDtos(recipe.getInteractions()),
                 recipeStepMapper.modelsToDtos(recipe.getRecipeSteps()),
@@ -67,6 +68,7 @@ public class RecipeMapper implements BaseMapper<RecipeDto, Recipe> {
                 recipe.setSubmitted(recipeDto.getSubmitted());
                 recipe.setEditDate((recipeDto.getEditDate()));
                 recipe.setDescription(recipeDto.getDescription());
+                recipe.setImageUrl(recipeDto.getImageUrl());
                 return recipe;
             }
         }
@@ -77,7 +79,8 @@ public class RecipeMapper implements BaseMapper<RecipeDto, Recipe> {
                 recipeDto.getMinutes(),
                 recipeDto.getSubmitted(),
                 recipeDto.getEditDate(),
-                recipeDto.getDescription()
+                recipeDto.getDescription(),
+                recipeDto.getImageUrl()
         );
         recipe.setUser(userMapper.dtoToModel(recipeDto.getUser()));
         return recipe;

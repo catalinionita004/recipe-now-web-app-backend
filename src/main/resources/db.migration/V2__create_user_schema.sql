@@ -1,9 +1,9 @@
 CREATE TABLE IF NOT EXISTS recipe_user (
     id SERIAL PRIMARY KEY,
-    first_name varchar(60),
-    last_name varchar(60),
-    email varchar(60),
-    password varchar(100),
-    role varchar(10),
+    first_name varchar(256),
+    last_name varchar(256),
+    email varchar(256),
+    password varchar(256),
+    role varchar(256),
     UNIQUE(email)
 );

@@ -118,17 +118,28 @@ public class RecipeService {
             int minutes = ((Number) result[4]).intValue();
             LocalDateTime submitted = (LocalDateTime) result[5];
             LocalDateTime editDate = (LocalDateTime) result[6];
-            UserDto userDto = userMapper.modelToDto((User) result[7]);
+            String imageUrl = (String) result[7];
+            UserDto userDto = userMapper.modelToDto((User) result[8]);
 
-            recipeLiteDtoMap.computeIfAbsent(recipeId, k -> new RecipeLiteDto(recipeId, recipeName, averageRating, ratingCounter, minutes, userDto, submitted, editDate));
+            recipeLiteDtoMap.computeIfAbsent(recipeId, k -> new RecipeLiteDto(recipeId, recipeName, averageRating, ratingCounter, minutes, userDto, submitted, editDate, imageUrl));
         });
     }
 
     private List<RecipeLiteDto> findReviewedRecipesByUser(Long userId) {
-        List<Long> results = recipeRepository.findReviewedRecipeIdsByUser(userId);
-        List<RecipeLiteDto> recipeLiteDtos = new ArrayList<>();
+        List<Object[]> results = recipeRepository.findReviewedRecipesLiteByUserId(userId);
 
-        recipeLiteDtos.sort((recipe1, recipe2) -> {
+        return results.parallelStream().map(result -> {
+            Long recipeId = ((Number) result[0]).longValue();
+            String recipeName = ((String) result[1]);
+            Double averageRating = (Double) result[2];
+            int ratingCounter = ((Number) result[3]).intValue();
+            int minutes = ((Number) result[4]).intValue();
+            LocalDateTime submitted = (LocalDateTime) result[5];
+            LocalDateTime editDate = (LocalDateTime) result[6];
+            String imageUrl = (String) result[7];
+
+            return new RecipeLiteDto(recipeId, recipeName, averageRating, ratingCounter, minutes, null, submitted, editDate, imageUrl);
+        }).sorted((recipe1, recipe2) -> {
             LocalDateTime date1 = (recipe1.getSubmitted() != null) ? recipe1.getSubmitted() : recipe1.getEditDate();
             LocalDateTime date2 = (recipe2.getSubmitted() != null) ? recipe2.getSubmitted() : recipe2.getEditDate();
 
@@ -141,11 +152,8 @@ public class RecipeService {
             } else {
                 return date2.compareTo(date1); // sortare descrescatoare
             }
-        });
-
-        return recipeLiteDtos;
+        }).collect(Collectors.toList());
     }
-
 
 
     public RecipeDto findRecipeById(Long id) {
@@ -197,14 +205,15 @@ public class RecipeService {
             recipeDto.setEditDate(localDateTime);
         else {
             recipeDto.setSubmitted(localDateTime);
+            recipeDto.setEditDate(localDateTime);
         }
         RecipeDto savedRecipeDto = recipeMapper.modelToDto(recipeRepository.save(recipeMapper.dtoToModel(recipeDto)));
 
         List<Object[]> results = recipeRepository.findAverageCountRatingByRecipeId(savedRecipeDto.getId());
         RecipeLiteDto newRecipeLiteDto = new RecipeLiteDto(savedRecipeDto);
-        newRecipeLiteDto.setAverageRating((Double) results.get(0)[0]);
+        newRecipeLiteDto.setAverageRating(results.get(0)[0] !=null ? (Double) results.get(0)[0] : 0.0d);
         newRecipeLiteDto.setRatingCount(((Number) results.get(0)[0]).intValue());
-        recipeLiteDtoMap.put(savedRecipeDto.getId(),newRecipeLiteDto);
+        recipeLiteDtoMap.put(savedRecipeDto.getId(), newRecipeLiteDto);
 
         System.out.println("am salvat reteta");
         return savedRecipeDto;
@@ -239,8 +248,9 @@ public class RecipeService {
             int minutes = ((Number) result[4]).intValue();
             LocalDateTime submittedDate = (LocalDateTime) result[5];
             LocalDateTime editDate = (LocalDateTime) result[6];
+            String imageUrl = (String) result[7];
 
-            recipeLiteDtos.add(new RecipeLiteDto(recipeId, recipeName, averageRating, ratingCounter, minutes, userDto, submittedDate, editDate));
+            recipeLiteDtos.add(new RecipeLiteDto(recipeId, recipeName, averageRating, ratingCounter, minutes, userDto, submittedDate, editDate, imageUrl));
         });
 
         recipeLiteDtos.sort((recipe1, recipe2) -> {

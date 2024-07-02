@@ -22,6 +22,7 @@ public class RecipeLiteDto {
     private UserDto user;
     private LocalDateTime submitted;
     private LocalDateTime editDate;
+    private String imageUrl;
 
     private Set<UserDtoLite> users;
 
@@ -78,6 +79,23 @@ public class RecipeLiteDto {
             this.editDate = submitted;
     }
 
+    public RecipeLiteDto(Long recipeId, String recipeName, Double averageRating, int ratingCounter,Integer minutes, UserDto user, LocalDateTime submitted, LocalDateTime editDate,String imageUrl) {
+        this.id = recipeId;
+        this.name = recipeName;
+        this.averageRating = averageRating;
+        this.ratingCount = ratingCounter;
+        this.minutes=minutes;
+        this.user = user;
+        if (this.averageRating == null)
+            this.averageRating = 0.0;
+        this.submitted = submitted;
+        this.editDate = editDate;
+        if (editDate == null)
+            this.editDate = submitted;
+        //TODO check if image exist
+        this.imageUrl = imageUrl;
+    }
+
     public RecipeLiteDto(RecipeLiteDto recipeLiteDto) {
         this.id = recipeLiteDto.getId();
         this.name = recipeLiteDto.getName();
@@ -88,6 +106,7 @@ public class RecipeLiteDto {
         this.submitted = recipeLiteDto.getSubmitted();
         this.editDate = recipeLiteDto.getEditDate();
         this.minutes = recipeLiteDto.getMinutes();
+        this.imageUrl = recipeLiteDto.getImageUrl();
     }
 
 
@@ -98,6 +117,7 @@ public class RecipeLiteDto {
         this.submitted = recipeDto.getSubmitted();
         this.editDate = recipeDto.getEditDate();
         this.user=recipeDto.getUser();
+        this.imageUrl = recipeDto.getImageUrl();
     }
 
 }

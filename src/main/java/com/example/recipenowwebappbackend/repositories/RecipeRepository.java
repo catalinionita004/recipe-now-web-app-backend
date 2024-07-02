@@ -16,7 +16,7 @@ import java.util.List;
 @Repository
 public interface RecipeRepository extends PagingAndSortingRepository<Recipe, Long>, JpaRepository<Recipe, Long>, JpaSpecificationExecutor<Recipe> {
 
-    @Query("SELECT r.id, r.name, AVG(ri.rating), COUNT(ri.rating),r.minutes, r.submitted, r.editDate, u FROM Recipe r " +
+    @Query("SELECT r.id, r.name, AVG(ri.rating), COUNT(ri.rating),r.minutes, r.submitted, r.editDate, r.imageUrl, u FROM Recipe r " +
             "LEFT JOIN r.user u " +
             "LEFT JOIN Interaction ri ON r.id = ri.recipe.id " +
             "GROUP BY r.id, r.name, r.submitted, r.editDate, u")
@@ -29,16 +29,22 @@ public interface RecipeRepository extends PagingAndSortingRepository<Recipe, Lon
     List<Object[]> findAverageCountRatingByRecipeId(@Param("recipeId") Long recipeId);
 
 
-    @Query("SELECT r.id, r.name, AVG(ri.rating), COUNT(ri.rating),r.minutes,r.submitted,r.editDate FROM Recipe r " +
+    @Query("SELECT r.id, r.name, AVG(ri.rating), COUNT(ri.rating),r.minutes,r.submitted,r.editDate, r.imageUrl FROM Recipe r " +
             "LEFT JOIN Interaction ri ON r.id = ri.recipe.id " +
             "WHERE r.user.id = :userId " +
             "GROUP BY r.id")
     List<Object[]> findRecipesLiteByUser(@Param("userId") Long userId);
+
     @Query("SELECT r.id FROM Recipe r " +
             "JOIN Interaction ri ON r.id = ri.recipe.id  " +
             "WHERE ri.user.id = :userId")
     List<Long> findReviewedRecipeIdsByUser(@Param("userId") Long userId);
 
+    @Query("SELECT r.id, r.name, AVG(ri.rating), COUNT(ri.rating), r.minutes, r.submitted, r.editDate, r.imageUrl FROM Recipe r " +
+            "JOIN Interaction ri ON r.id = ri.recipe.id " +
+            "WHERE ri.user.id = :userId " +
+            "GROUP BY r.id")
+    List<Object[]> findReviewedRecipesLiteByUserId(@Param("userId") Long userId);
 
     @Query("SELECT DISTINCT r.id " +
             "FROM Recipe r " +

@@ -18,6 +18,7 @@ public class RecipeDto {
     private LocalDateTime submitted;
     private LocalDateTime editDate;
     private String description;
+    private String imageUrl;
     private UserDto user;
     private List<InteractionDto> interactions;
     private List<RecipeStepDto> recipeStepList;

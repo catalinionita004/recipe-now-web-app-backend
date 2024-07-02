@@ -39,15 +39,18 @@ public class Recipe implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id", nullable = false)
     private User user;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe", cascade = CascadeType.ALL)
-    private Set<Interaction> interactions= new HashSet<>();
+    private Set<Interaction> interactions = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe", cascade = CascadeType.ALL)
-    private Set<RecipeStep> recipeSteps= new HashSet<>();
+    private Set<RecipeStep> recipeSteps = new HashSet<>();
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "recipe", cascade = CascadeType.ALL)
     private Nutrition nutrition;
@@ -65,24 +68,34 @@ public class Recipe implements Serializable {
     private Set<Tag> tags = new HashSet<>();
 
 
-    public Recipe(Long id){
-        this.id=id;
+    public Recipe(Long id) {
+        this.id = id;
     }
 
-    public Recipe(String name,Integer minutes,LocalDateTime submitted,String description){
-        this.name=name;
-        this.minutes= minutes;
-        this.submitted=submitted;
-        this.description=description;
+    public Recipe(String name, Integer minutes, LocalDateTime submitted, String description) {
+        this.name = name;
+        this.minutes = minutes;
+        this.submitted = submitted;
+        this.description = description;
     }
 
-    public Recipe(Long id,String name,Integer minutes,LocalDateTime submitted,LocalDateTime editDate,String description){
-        this.id=id;
-        this.name=name;
-        this.minutes= minutes;
-        this.submitted=submitted;
+    public Recipe(Long id, String name, Integer minutes, LocalDateTime submitted, LocalDateTime editDate, String description) {
+        this.id = id;
+        this.name = name;
+        this.minutes = minutes;
+        this.submitted = submitted;
         this.editDate = editDate;
-        this.description=description;
+        this.description = description;
+    }
+
+    public Recipe(Long id, String name, Integer minutes, LocalDateTime submitted, LocalDateTime editDate, String description, String imageUrl) {
+        this.id = id;
+        this.name = name;
+        this.minutes = minutes;
+        this.submitted = submitted;
+        this.editDate = editDate;
+        this.description = description;
+        this.imageUrl = imageUrl;
     }
 
     public void setNutrition(Nutrition nutrition) {
@@ -91,19 +104,22 @@ public class Recipe implements Serializable {
             nutrition.setRecipe(this);
         }
     }
+
     public void setInteractions(Set<Interaction> interactions) {
-            for (Interaction interaction : interactions) {
-                interaction.setRecipe(this);
-            }
-            this.interactions = interactions;
+        for (Interaction interaction : interactions) {
+            interaction.setRecipe(this);
+        }
+        this.interactions = interactions;
     }
-    public void setRecipeSteps(Set<RecipeStep> recipeSteps){
+
+    public void setRecipeSteps(Set<RecipeStep> recipeSteps) {
         for (RecipeStep recipeStep : recipeSteps) {
             recipeStep.setRecipe(this);
         }
         this.recipeSteps = recipeSteps;
     }
-    public void deleteRecipeStep(RecipeStep recipeStep){
+
+    public void deleteRecipeStep(RecipeStep recipeStep) {
         recipeSteps.remove(recipeStep);
     }
 
