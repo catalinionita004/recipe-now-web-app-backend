@@ -212,7 +212,7 @@ public class RecipeService {
         List<Object[]> results = recipeRepository.findAverageCountRatingByRecipeId(savedRecipeDto.getId());
         RecipeLiteDto newRecipeLiteDto = new RecipeLiteDto(savedRecipeDto);
         newRecipeLiteDto.setAverageRating(results.get(0)[0] !=null ? (Double) results.get(0)[0] : 0.0d);
-        newRecipeLiteDto.setRatingCount(((Number) results.get(0)[0]).intValue());
+        newRecipeLiteDto.setRatingCount(((Number) results.get(0)[1]).intValue());
         recipeLiteDtoMap.put(savedRecipeDto.getId(), newRecipeLiteDto);
 
         System.out.println("am salvat reteta");
