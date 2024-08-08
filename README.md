@@ -4,7 +4,7 @@ Welcome to the backend repository for the Recipe Now Web App! Check out our fron
 
 # 🌟 **Live Demo** 🌟
 
-[![Recipe Now](https://img.shields.io/badge/Recipe%20Now-Live%20Demo-brightgreen?style=for-the-badge)](https://recipe-now-frontend-s7qlbu7unq-ez.a.run.app/) - Live demo is currently not available due to hosting costs.
+[![Recipe Now](https://img.shields.io/badge/Recipe%20Now-Live%20Demo-brightgreen?style=for-the-badge)](https://recipe-now-frontend-s7qlbu7unq-ez.a.run.app/) - *Live demo is currently not available due to hosting costs.*
 
 ## ⏳ Startup Time & Demo Video
 
